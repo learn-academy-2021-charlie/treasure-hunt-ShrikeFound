@@ -58,8 +58,22 @@ class App extends Component{
 
     return false
 
+  }
 
-  
+  resetBoard = () =>{
+    let treasureLocation = Math.floor(Math.random() * this.state.board.length)
+    let trapLocation = null 
+    do{
+      trapLocation = Math.floor(Math.random() * this.state.board.length)
+    }while(trapLocation === treasureLocation)
+
+    this.setState({
+      board: ["❓", "❓", "❓", "❓", "❓", "❓", "❓", "❓", "❓"],
+      treasureLocation: treasureLocation,
+      trapLocation: trapLocation,
+      counter: 5,
+      gameOver: false,
+    })
   }
 
   
@@ -77,7 +91,7 @@ class App extends Component{
         }))}
         </div>
         <h3>{gameOver ? `Game over. you ${gameOver}!`: `you have ${counter} guesses left.`}</h3>
-
+        {gameOver && <button onClick={this.resetBoard}>Play Again</button>}
       </>
     )
   }
