@@ -1,0 +1,22 @@
+.square{
+    border: 2px solid goldenrod;
+    font-size: 3rem;
+    display: grid;
+    place-items: center;
+}
+
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5em;
+    width: 40vw;
+    height: 40vw;
+    margin: 0 auto;
+}
+
+@media screen and (orientation: landscape){
+    .board{
+        width: 30vw;
+        height: 30vw;
+    }
+}
