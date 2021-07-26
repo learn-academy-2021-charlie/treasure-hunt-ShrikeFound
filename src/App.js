@@ -7,13 +7,18 @@ class App extends Component{
     super(props)
     this.state = {
       board: ["❓", "❓", "❓", "❓", "❓", "❓", "❓", "❓", "❓"],
-      treasureLocation: null
+      treasureLocation: null,
+      trapLocation: null
     }
   }
 
   componentDidMount(){
     let treasureLocation = Math.floor(Math.random() * this.state.board.length)
-    this.setState({treasureLocation: treasureLocation})
+    let trapLocation = null 
+    do{
+      trapLocation = Math.floor(Math.random() * this.state.board.length)
+    }while(trapLocation === treasureLocation)
+    this.setState({treasureLocation: treasureLocation, trapLocation: trapLocation})
   }
 
 
@@ -22,6 +27,8 @@ class App extends Component{
     const newBoard = [...this.state.board]
     if(index === this.state.treasureLocation){
       newBoard[index] = "💎"
+    }else if(index === this.state.trapLocation){
+      newBoard[index] = "💣"
     }else{
       newBoard[index] = "🌴"
     }
@@ -32,10 +39,10 @@ class App extends Component{
   
 
   render(){
-    const {board,treasureLocation} = this.state
+    const {board,treasureLocation,trapLocation} = this.state
     return(
       <>
-        <h1>Treasure Hunt Game ({treasureLocation})</h1>
+        <h1>Treasure Hunt Game ({treasureLocation}/{trapLocation})</h1>
         <div className="board">
         {board.map(((square,index) => {
           return <Square key={index} index={index} value={square} handleClick={this.handleClick}/>
