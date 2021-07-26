@@ -82,7 +82,7 @@ class App extends Component{
     const {board,counter,gameOver} = this.state
     return(
       <div className="app">
-        <h1>Treasure Hunt Game {this.state.treasureLocation}</h1>
+        <h1>Treasure Hunt Game</h1>
         <p>Click on a square to make a guess, but beware the bomb square.</p>
         <div className="board">
         {board.map(((square,index) => {
