@@ -49,11 +49,11 @@ class App extends Component{
     //check to see if game is won or lost.
     // console.log("checking win condition...")
     //losing conditions: either counter is at 0 or the bomb has been found.
-    if(counter <= 0 || board.includes(this.state.lossEmoji)){
+    if(board.includes(this.state.winEmoji)){
+      return "win"
+    }else if(counter <= 0 || board.includes(this.state.lossEmoji)){
       return "lose"
       //win conditions: gem found
-    }else if(board.includes(this.state.winEmoji)){
-      return "win"
     }
 
     return false
@@ -81,9 +81,9 @@ class App extends Component{
   render(){
     const {board,counter,gameOver} = this.state
     return(
-      <>
-        <h1>Treasure Hunt Game</h1>
-        <p>Click on a square to make a guess. You have 5 guesses to click on the treasure square, but beware the bomb square.</p>
+      <div className="app">
+        <h1>Treasure Hunt Game {this.state.treasureLocation}</h1>
+        <p>Click on a square to make a guess, but beware the bomb square.</p>
         <div className="board">
         {board.map(((square,index) => {
           return <Square key={index} index={index} value={square} handleClick={this.handleClick}/>
@@ -91,7 +91,7 @@ class App extends Component{
         </div>
         <h3>{gameOver ? `Game over. You ${gameOver}!`: `you have ${counter} guesses left.`}</h3>
         {gameOver && <button onClick={this.resetBoard}>Play Again</button>}
-      </>
+      </div>
     )
   }
 }

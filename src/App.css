@@ -1,3 +1,7 @@
+.app{
+    max-width: 95%;
+    margin: 0 auto;
+}
 .square{
     border: 2px solid goldenrod;
     font-size: 3rem;
@@ -9,9 +13,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: .5em;
-    width: 50vw;
-    height: 50vw;
-    margin: 2rem auto 3rem;
+    width: 35vw;
+    height: 35vw;
+    margin: 2rem auto 2rem;
 }
 
 @media screen and (orientation: landscape){
@@ -20,6 +24,13 @@
         height: 30vw;
     }
 }
+
+@media screen and (min-width: 800px){
+    .square{
+        font-size: 5rem;
+    }
+}
+
 
 body{
     text-align: center;
@@ -37,6 +48,6 @@ button {
     border: none;
     color: white;
     font-weight: bold;
-    padding: 15px 32px;
+    padding: .8rem 1.6rem;
     text-align: center;
   }
