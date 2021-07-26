@@ -13,7 +13,7 @@ class App extends Component{
       neutralEmoji: "🌴",
       lossEmoji: "💣",
       winEmoji: "💎",
-      gameOver: false
+      gameOver: false,
     }
   }
 
@@ -38,42 +38,46 @@ class App extends Component{
     }else{
       newBoard[index] = "🌴"
     }
+    const newCounter = this.state.counter - 1 
+    const gameState = this.gameOver(newBoard,newCounter);
 
-    
-    this.setState({board: newBoard,counter: this.state.counter-1,gameOver: this.gameOver()})
+    this.setState({board: newBoard,counter: newCounter, gameOver: gameState})
+
   }
 
-  gameOver = () =>{
+  gameOver = (board,counter) =>{
     //check to see if game is won or lost.
     console.log("checking win condition...")
     //losing conditions: either counter is at 0 or the bomb has been found.
-    if(this.state.counter <= 0 || this.state.board.includes(this.state.lossEmoji)){
-      console.log("lose")
-      return true
-    }else if(this.state.board.includes(this.state.winEmoji)){
-      return true
+    if(counter <= 0 || board.includes(this.state.lossEmoji)){
+      return "lose"
+      //win conditions: gem found
+    }else if(board.includes(this.state.winEmoji)){
+      return "win"
     }
 
     return false
 
 
-    //win conditions: gem found
+  
   }
 
   
 
   render(){
-    const {board,treasureLocation,trapLocation,counter} = this.state
+    const {board,treasureLocation,trapLocation,counter,gameOver} = this.state
+    console.log(this.state)
     return(
       <>
         <h1>Treasure Hunt Game ({treasureLocation}/{trapLocation})</h1>
         <p>Click on a square to make a guess. You have 5 guesses to click on the treasure square, but beware the bomb square.</p>
-        <p>you have {counter} guesses left.</p>
         <div className="board">
         {board.map(((square,index) => {
           return <Square key={index} index={index} value={square} handleClick={this.handleClick}/>
         }))}
         </div>
+        <h3>{gameOver ? `Game over. you ${gameOver}!`: `you have ${counter} guesses left.`}</h3>
+
       </>
     )
   }
