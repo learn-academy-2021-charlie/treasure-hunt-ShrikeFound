@@ -9,7 +9,11 @@ class App extends Component{
       board: ["❓", "❓", "❓", "❓", "❓", "❓", "❓", "❓", "❓"],
       treasureLocation: null,
       trapLocation: null,
-      counter: 5
+      counter: 5,
+      neutralEmoji: "🌴",
+      lossEmoji: "💣",
+      winEmoji: "💎",
+      gameOver: false
     }
   }
 
@@ -24,6 +28,7 @@ class App extends Component{
 
 
   handleClick = (index) =>{
+    if (this.state.gameOver) return
 
     const newBoard = [...this.state.board]
     if(index === this.state.treasureLocation){
@@ -33,10 +38,28 @@ class App extends Component{
     }else{
       newBoard[index] = "🌴"
     }
+
     
-    
-    this.setState({board: newBoard,counter: this.state.counter-1})
+    this.setState({board: newBoard,counter: this.state.counter-1,gameOver: this.gameOver()})
+  }
+
+  gameOver = () =>{
+    //check to see if game is won or lost.
+    console.log("checking win condition...")
+    //losing conditions: either counter is at 0 or the bomb has been found.
+    if(this.state.counter <= 0 || this.state.board.includes(this.state.lossEmoji)){
+      console.log("lose")
+      return true
+    }else if(this.state.board.includes(this.state.winEmoji)){
+      return true
     }
+
+    return false
+
+
+    //win conditions: gem found
+  }
+
   
 
   render(){
