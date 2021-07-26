@@ -10,6 +10,11 @@ class App extends Component{
     }
   }
 
+  handleClick = (index) =>{
+    const newBoard = [...this.state.board]
+    newBoard[index] = "🌴"
+    this.setState({board: newBoard})
+    }
   
 
   render(){
@@ -19,7 +24,7 @@ class App extends Component{
         <h1>Treasure Hunt Game</h1>
         <div className="board">
         {board.map(((square,index) => {
-          return <Square key={index} index={index} value={square}/>
+          return <Square key={index} index={index} value={square} handleClick={this.handleClick}/>
         }))}
         </div>
       </>

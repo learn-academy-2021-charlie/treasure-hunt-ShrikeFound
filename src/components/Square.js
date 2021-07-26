@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 class Square extends Component{
   render(){
+    const {handleClick,index,value} = this.props
     return(
-      <div className="square">
-        {this.props.value}
+      <div className="square" onClick={() => handleClick(index)}>
+        {value}
       </div>
 
     )
